@@ -1,24 +1,41 @@
+______________________________________________________
+# MicroWatch - A advanced watch program for Micro:Bit ⌚
+______________________________________________________
 
-> Open this page at [https://fearlessadam.github.io/microwatchnew/](https://fearlessadam.github.io/microwatchnew/)
+Have you ever wished for a Unique, Advanced Micro:Bit watch? well, if you did now you have one! Introducing MicroWatch!
 
-## Use as Extension
+______________________________________________________
+# Compatiblity 💿
 
-This repository can be added as an **extension** in MakeCode.
+This program uses bluetooth, and other stuff that works with Micro:Bit V2. so, the program can run only in V2 Micro:Bit's only. Sorry!
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/fearlessadam/microwatchnew** and import
+______________________________________________________
 
-## Edit this project
+# Installation ⚙️
 
-To edit this repository in MakeCode.
+Click the green "Code" button and click "Download as zip". after this, extract it. You will see a folder called "FLashToMicroBit". Flash the hex file inside the folder to your Micro:Bit
+______________________________________________________
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **Import** then click on **Import URL**
-* paste **https://github.com/fearlessadam/microwatchnew** and click import
+# How to use 📖
 
-#### Metadata (used for search, rendering)
+1. Press button A to change the Hours.
+2. Press Button B to change Minutes.
+3. Shake to see the current time.
+4. Press The Logo to play a game.
+5. Long press the logo to stop the game.
 
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+Connect the Micro:Bit with this program running to your PC and open the serial for More Information.
+
+______________________________________________________
+
+# Note ❗
+
+Keep in mind that the program is Beta so, you may occur crashes as well.
+
+______________________________________________________
+
+# Conclusion
+
+Anyone if welcomed to imporve the program. you can fork this project and improve/add more features in your style! Keep in mind you are not allowed to steal this project. Have fun!
+
+______________________________________________________
