@@ -34,7 +34,7 @@ Keep in mind that the program is Beta so, you may occur crashes as well.
 
 ______________________________________________________
 
-# Conclusion
+# Conclusion 🏳️
 
 Anyone if welcomed to imporve the program. you can fork this project and improve/add more features in your style! Keep in mind you are not allowed to steal this project. Have fun!
 
