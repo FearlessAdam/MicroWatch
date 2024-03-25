@@ -13,7 +13,7 @@ ______________________________________________________
 
 # Installation ⚙️
 
-Click the green "Code" button and click "Download as zip". after this, extract it. You will see a folder called "FLashToMicroBit". Flash the hex file inside the folder to your Micro:Bit
+Download the hex file from https://github.com/FearlessAdam/MicroWatch/releases/ and flash it your Micro:Bit. You will see a Loading Screen on your Micro:Bit after you flash the hex file.
 ______________________________________________________
 
 # How to use 📖
