@@ -46,7 +46,7 @@ To input data using serial follow the step given above and then click Control > 
 
 -Enter Key
 
-Then enable The 'LF' option. after that, Type your command ie. Hour=<Hours> or Min=<Minutes> and click submit button.
+Then enable The 'LF' option. after that, Type your command ie. Hour=(Hours) or Min=(Minutes) and click submit button.
 ______________________________________________________
 # Connecting with Bluetooth (For Phones)
 
@@ -58,7 +58,7 @@ ______________________________________________________
 
 -Connect your Micro:Bit to the app
 
-After that, Type your command ie. Hour=<Hours> or Min=<Minutes> On the text box then click the Send button.
+After that, Type your command ie. Hour=(hours) or Min=(minutes) On the text box then click the Send button.
 ______________________________________________________
 # Note ❗
 
