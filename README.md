@@ -33,7 +33,6 @@ ______________________________________________________
 -Parity: None
 -Stop Bits: 1
 -Flow Control: None
--
 ______________________________________________________
 # Input Commands using Serial.
 
@@ -41,7 +40,6 @@ To input data using serial follow the step given above and then click Control > 
 
 -Send to this Process Only
 -Enter Key
--
 
 Then enable The 'LF' option. after that, Type your command ie. Hour=<Hours> or Min=<Minutes> and click submit button.
 ______________________________________________________
@@ -53,7 +51,6 @@ ______________________________________________________
 
 -Open the SerialBluetoothTerminal on your mobile
 -Connect your Micro:Bit to the app
--
 
 After that, Type your command ie. Hour=<Hours> or Min=<Minutes> On the text box then click the Send button.
 ______________________________________________________
