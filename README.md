@@ -11,7 +11,7 @@ This program uses bluetooth, and other stuff that works with Micro:Bit V2. so, t
 
 ______________________________________________________
 
-# Installation ⚙
+# Installation 💿
 
 Download the hex file from https://github.com/FearlessAdam/MicroWatch/releases/ and flash it your Micro:Bit. You will see a Loading Screen on your Micro:Bit after you flash the hex file.
 ______________________________________________________
