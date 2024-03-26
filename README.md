@@ -5,13 +5,13 @@ ______________________________________________________
 Have you ever wished for a Unique, Advanced Micro:Bit watch? well, if you did now you have one! Introducing MicroWatch!
 
 ______________________________________________________
-# Compatiblity 💿
+# Compatiblity ⚙️
 
 This program uses bluetooth, and other stuff that works with Micro:Bit V2. so, the program can run only in V2 Micro:Bit's only. Sorry!
 
 ______________________________________________________
 
-# Installation ⚙️
+# Installation ⚙
 
 Download the hex file from https://github.com/FearlessAdam/MicroWatch/releases/ and flash it your Micro:Bit. You will see a Loading Screen on your Micro:Bit after you flash the hex file.
 ______________________________________________________
