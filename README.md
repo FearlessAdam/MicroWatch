@@ -29,9 +29,13 @@ ______________________________________________________
 2. Click File > New Connection > serial > And select the port of your Micro:Bit, and use these settings:
 
 -Speed: 115200
+
 -Data: 8Bit
+
 -Parity: None
+
 -Stop Bits: 1
+
 -Flow Control: None
 ______________________________________________________
 # Input Commands using Serial.
@@ -39,6 +43,7 @@ ______________________________________________________
 To input data using serial follow the step given above and then click Control > Broadcast Command. Disable Realtime Mode then enable the following settings:
 
 -Send to this Process Only
+
 -Enter Key
 
 Then enable The 'LF' option. after that, Type your command ie. Hour=<Hours> or Min=<Minutes> and click submit button.
@@ -50,6 +55,7 @@ ______________________________________________________
 # Input Commands Using Bluetooth (For Phones)
 
 -Open the SerialBluetoothTerminal on your mobile
+
 -Connect your Micro:Bit to the app
 
 After that, Type your command ie. Hour=<Hours> or Min=<Minutes> On the text box then click the Send button.
