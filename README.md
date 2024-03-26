@@ -28,15 +28,15 @@ ______________________________________________________
 1. Install Tera Term. (At the time of writting Version 5 is the latest.)
 2. Click File > New Connection > serial > And select the port of your Micro:Bit, and use these settings:
 
--Speed: 115200
+ -Speed: 115200
 
--Data: 8Bit
+ -Data: 8Bit
 
--Parity: None
+ -Parity: None
 
--Stop Bits: 1
+ -Stop Bits: 1
 
--Flow Control: None
+ -Flow Control: None
 ______________________________________________________
 # Input Commands using Serial.
 
