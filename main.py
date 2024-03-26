@@ -32,7 +32,7 @@ def DoLoad():
         control.panic(668)
     bluetooth.start_uart_service()
     bluetooth.set_transmit_power(8)
-    serial.set_baud_rate(BaudRate.BAUD_RATE14400)
+    serial.set_baud_rate(BaudRate.BAUD_RATE115200)
     music.play(music.builtin_playable_sound_effect(soundExpression.giggle),
         music.PlaybackMode.LOOPING_IN_BACKGROUND)
     noDo = 1
@@ -85,13 +85,21 @@ def DoLoad():
     serial.write_line("Setting Transmit Power..")
     basic.show_icon(IconNames.YES)
     mkae1 = randdiv / 2.5 * 4
+    basic.pause(100)
     serial.write_line("Finalizing Boot..")
+    basic.pause(100)
     serial.write_line("Took " + ("" + str(mkae1)) + " ms to load")
+    basic.pause(100)
     serial.write_line("----------------------------------------------------------")
+    basic.pause(100)
     serial.write_line("MicroWatch 1.2/Beta Running on Micro:bit \"" + control.device_name() + "\"")
+    basic.pause(100)
     serial.write_line("The Current Time may not be correct. Use the A button to set hours and Button B to set Minutes")
+    basic.pause(100)
     serial.write_line("You can change the time by connecting the micro:bit via bluetooth/serial to your device and send \"Hours=<the hour>\" to change the hour and \"Min=<the minutes>\"")
+    basic.pause(100)
     serial.write_line("----------------------------------------------------------")
+    basic.pause(100)
     serial.write_line("Warning: Note that the program is beta so, you may occur crashes.")
     music.stop_all_sounds()
     basic.pause(900)
@@ -160,11 +168,15 @@ def my_function2():
 buttonClicks.on_button_held(buttonClicks.AorB.A, my_function2)
 
 runningstatus = 0
-xAcceleration = 0
+SerialBSubNum = 0
+SerialB = ""
 BleBSubNum = 0
-BleB = ""
+Bleb = ""
+xAcceleration = 0
+SerialASubNum = 0
+SerialA = ""
 BleASubNum = 0
-bleA = ""
+BleA = ""
 scores = ""
 time = ""
 minute = 0
@@ -210,23 +222,23 @@ def on_forever2():
 basic.forever(on_forever2)
 
 def on_forever3():
-    global bleA, BleASubNum, hour
-    bleA = bluetooth.uart_read_until(serial.delimiters(Delimiters.NEW_LINE))
-    BleASubNum = parse_float(bleA.substr(5, 8))
-    if bleA.includes("Hour="):
+    global BleA, BleASubNum, hour
+    BleA = bluetooth.uart_read_until(serial.delimiters(Delimiters.NEW_LINE))
+    BleASubNum = parse_float(BleA.substr(5, 8))
+    if BleA.includes("Hour="):
         if BleASubNum < 25:
             hour = BleASubNum
             serial.write_line("The Hour is set to " + str(hour) + " Via Bluetooth serial Input.")
 basic.forever(on_forever3)
 
 def on_forever4():
-    global BleB, BleBSubNum, minute
-    BleB = bluetooth.uart_read_until(serial.delimiters(Delimiters.NEW_LINE))
-    BleBSubNum = parse_float(BleB.substr(4, 7))
-    if BleB.includes("Min="):
-        if BleBSubNum < 61:
-            minute = BleBSubNum
-            serial.write_line("The Minute is set to " + str(minute) + " Via Bluetooth serial Input.")
+    global SerialA, SerialASubNum, hour
+    SerialA = serial.read_until(serial.delimiters(Delimiters.NEW_LINE))
+    SerialASubNum = parse_float(SerialA.substr(5, 8))
+    if SerialA.includes("Hour="):
+        if SerialASubNum < 25:
+            hour = SerialASubNum
+            serial.write_line("The Hour is set to " + str(hour) + " Via serial Input.")
 basic.forever(on_forever4)
 
 def on_forever5():
@@ -257,9 +269,29 @@ def on_forever6():
             noexecute = 12
 basic.forever(on_forever6)
 
+def on_forever7():
+    global Bleb, BleBSubNum, minute
+    Bleb = bluetooth.uart_read_until(serial.delimiters(Delimiters.NEW_LINE))
+    BleBSubNum = parse_float(Bleb.substr(4, 7))
+    if Bleb.includes("Min="):
+        if BleBSubNum < 61:
+            minute = BleBSubNum
+            serial.write_line("The Minute is set to " + str(minute) + " Via Bluetooth serial Input.")
+basic.forever(on_forever7)
+
+def on_forever8():
+    global SerialB, SerialBSubNum, minute
+    SerialB = serial.read_until(serial.delimiters(Delimiters.NEW_LINE))
+    SerialBSubNum = parse_float(SerialB.substr(4, 7))
+    if SerialB.includes("Min="):
+        if SerialASubNum < 61:
+            minute = SerialBSubNum
+            serial.write_line("The Minute is set to " + str(minute) + " Via serial Input.")
+basic.forever(on_forever8)
+
 # asteroid movement
 
-def on_forever7():
+def on_forever9():
     global astroid2, gameoption, newly1
     if noDo == 0:
         if gameoption == 24:
@@ -302,9 +334,9 @@ def on_forever7():
             else:
                 astroid2.delete()
                 game.add_score(1)
-basic.forever(on_forever7)
+basic.forever(on_forever9)
 
-def on_forever8():
+def on_forever10():
     global asteroid, gameoption, newly1
     if noDo == 0:
         if gameoption == 24:
@@ -347,11 +379,11 @@ def on_forever8():
             else:
                 asteroid.delete()
                 game.add_score(1)
-basic.forever(on_forever8)
+basic.forever(on_forever10)
 
 # firing lasers
 
-def on_forever9():
+def on_forever11():
     global noexecute
     if noDo == 0:
         if gameoption == 24:
@@ -386,7 +418,7 @@ def on_forever9():
             
         else:
             noexecute = 8
-basic.forever(on_forever9)
+basic.forever(on_forever11)
 
 def on_in_background():
     global runningstatus
