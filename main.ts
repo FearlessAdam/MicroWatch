@@ -1,7 +1,10 @@
-input.onLogoEvent(TouchButtonEvent.LongPressed, function on_logo_long_pressed() {
-    
+input.onPinPressed(TouchPin.P0, function () {
     if (noDo == 0) {
-        basic.pause(1000)
+        media.sendCode(media.keys(media._MediaKey.playPause))
+    }
+})
+input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
+    if (noDo == 0) {
         game.setScore(0)
         player.delete()
         asteroid.delete()
@@ -11,10 +14,8 @@ input.onLogoEvent(TouchButtonEvent.LongPressed, function on_logo_long_pressed() 
         game.pause()
         basic.clearScreen()
     }
-    
 })
-input.onButtonPressed(Button.A, function on_button_pressed_a() {
-    
+input.onButtonPressed(Button.A, function () {
     if (noDo == 0) {
         if (gameoption == 24) {
             noexecute = 4
@@ -23,20 +24,17 @@ input.onButtonPressed(Button.A, function on_button_pressed_a() {
         } else {
             hour += 1
         }
-        
     }
-    
 })
-function DoLoad() {
-    
+function DoLoad () {
     let microVersion = control.hardwareVersion()
-    if (microVersion == "1") {
+if (microVersion == "1") {
         basic.showString("Incompatible MicroBit!")
         basic.pause(4000)
         control.panic(668)
     }
-    
     bluetooth.startUartService()
+    media.startMediaService()
     bluetooth.setTransmitPower(8)
     serial.setBaudRate(BaudRate.BaudRate115200)
     music.play(music.builtinPlayableSoundEffect(soundExpression.giggle), music.PlaybackMode.LoopingInBackground)
@@ -60,6 +58,7 @@ function DoLoad() {
         # # . . .
         # # . . .
         `)
+    serial.writeLine("Starting Bluetooth Media Service..")
     basic.pause(randdiv / 2.5)
     basic.showLeds(`
         # # # . .
@@ -93,7 +92,7 @@ function DoLoad() {
     basic.pause(100)
     serial.writeLine("Finalizing Boot..")
     basic.pause(100)
-    serial.writeLine("Took " + ("" + ("" + mkae1)) + " ms to load")
+    serial.writeLine("Took " + ("" + mkae1) + " ms to load")
     basic.pause(100)
     serial.writeLine("----------------------------------------------------------")
     basic.pause(100)
@@ -112,23 +111,23 @@ function DoLoad() {
     noDo = 0
     basic.clearScreen()
 }
-
-buttonClicks.onButtonHeld(buttonClicks.AorB.B, function my_function() {
-    
+input.onPinPressed(TouchPin.P2, function () {
+    if (noDo == 0) {
+        media.sendCode(media.keys(media._MediaKey.previous))
+    }
+})
+buttonClicks.onButtonHeld(buttonClicks.AorB.B, function () {
     if (noDo == 0) {
         if (gameoption == 24) {
             noexecute = 56
         } else if (gameoption == 12) {
             noexecute = 99
         } else {
-            basic.showString("Heat" + ":" + ("" + ("" + input.temperature())) + "C")
+            basic.showString("Heat" + ":" + ("" + input.temperature()) + "C")
         }
-        
     }
-    
 })
-input.onButtonPressed(Button.B, function on_button_pressed_b() {
-    
+input.onButtonPressed(Button.B, function () {
     if (noDo == 0) {
         if (gameoption == 24) {
             noexecute = 6
@@ -137,12 +136,14 @@ input.onButtonPressed(Button.B, function on_button_pressed_b() {
         } else {
             minute += 1
         }
-        
     }
-    
 })
-input.onGesture(Gesture.Shake, function on_gesture_shake() {
-    
+input.onPinPressed(TouchPin.P1, function () {
+    if (noDo == 0) {
+        media.sendCode(media.keys(media._MediaKey.next))
+    }
+})
+input.onGesture(Gesture.Shake, function () {
     if (noDo == 0) {
         if (gameoption == 24) {
             noexecute = 8
@@ -151,12 +152,9 @@ input.onGesture(Gesture.Shake, function on_gesture_shake() {
         } else {
             basic.showString(time)
         }
-        
     }
-    
 })
-input.onLogoEvent(TouchButtonEvent.Pressed, function on_logo_pressed() {
-    
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     if (noDo == 0) {
         basic.pause(1000)
         game.setScore(0)
@@ -169,12 +167,9 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function on_logo_pressed() {
             gameoption = 12
             game.resume()
         }
-        
     }
-    
 })
-buttonClicks.onButtonHeld(buttonClicks.AorB.A, function my_function2() {
-    
+buttonClicks.onButtonHeld(buttonClicks.AorB.A, function () {
     if (noDo == 0) {
         if (gameoption == 24) {
             noexecute = 58
@@ -183,9 +178,7 @@ buttonClicks.onButtonHeld(buttonClicks.AorB.A, function my_function2() {
         } else {
             basic.showString(scores)
         }
-        
     }
-    
 })
 let runningstatus = 0
 let SerialBSubNum = 0
@@ -207,7 +200,7 @@ let hour = 0
 let noexecute = 0
 let newly1 = 0
 let gameoption = 0
-let astroid2 : game.LedSprite = null
+let astroid2: game.LedSprite = null
 let noDo = 0
 let player : game.LedSprite = null
 let asteroid : game.LedSprite = null
@@ -218,19 +211,18 @@ let randNum12 = 0
 let randdiv2 = 0
 DoLoad()
 let delay = 500
-loops.everyInterval(60000, function on_every_interval() {
-    
+pins.touchSetMode(TouchTarget.P1, TouchTargetMode.Capacitive)
+pins.touchSetMode(TouchTarget.P2, TouchTargetMode.Capacitive)
+pins.touchSetMode(TouchTarget.P0, TouchTargetMode.Capacitive)
+loops.everyInterval(60000, function () {
     minute += 1
 })
-basic.forever(function on_forever() {
-    
+basic.forever(function () {
     if (noDo == 0) {
-        scores = "Score:" + ("" + ("" + game.score()))
+        scores = "Score:" + ("" + game.score())
     }
-    
 })
-basic.forever(function on_forever2() {
-    
+basic.forever(function () {
     if (noDo == 0) {
         if (hour == 24) {
             hour = 0
@@ -238,49 +230,37 @@ basic.forever(function on_forever2() {
             minute = 0
             hour += 1
         }
-        
     }
-    
-    time = "" + ("" + hour) + ":" + ("" + ("" + minute))
+    time = "" + hour + ":" + ("" + minute)
 })
-basic.forever(function on_forever3() {
-    
+basic.forever(function () {
     BleA = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
     BleASubNum = parseFloat(BleA.substr(5, 8))
     if (BleA.includes("Hour=")) {
         if (BleASubNum < 25) {
             hour = BleASubNum
-            serial.writeLine("The Hour is set to " + ("" + hour) + " Via Bluetooth serial Input.")
+            serial.writeLine("The Hour is set to " + hour + " Via Bluetooth serial Input.")
         }
-        
     }
-    
 })
-basic.forever(function on_forever4() {
-    
+basic.forever(function () {
     SerialA = serial.readUntil(serial.delimiters(Delimiters.NewLine))
     SerialASubNum = parseFloat(SerialA.substr(5, 8))
     if (SerialA.includes("Hour=")) {
         if (SerialASubNum < 25) {
             hour = SerialASubNum
-            serial.writeLine("The Hour is set to " + ("" + hour) + " Via serial Input.")
+            serial.writeLine("The Hour is set to " + hour + " Via serial Input.")
         }
-        
     }
-    
 })
-basic.forever(function on_forever5() {
-    
+basic.forever(function () {
     if (noDo == 0) {
         if (gameoption == 24) {
             player = game.createSprite(2, 4)
         }
-        
     }
-    
 })
-basic.forever(function on_forever6() {
-    
+basic.forever(function () {
     if (noDo == 0) {
         if (gameoption == 24) {
             xAcceleration = input.acceleration(Dimension.X)
@@ -289,7 +269,6 @@ basic.forever(function on_forever6() {
             } else if (xAcceleration > 150 && player.get(LedSpriteProperty.X) < 4) {
                 player.change(LedSpriteProperty.X, 1)
             }
-            
             basic.pause(50)
         } else if (gameoption == 12) {
             xAcceleration = input.acceleration(Dimension.X)
@@ -298,44 +277,34 @@ basic.forever(function on_forever6() {
             } else if (xAcceleration > 150 && player.get(LedSpriteProperty.X) < 4) {
                 player.change(LedSpriteProperty.X, 1)
             }
-            
             basic.pause(50)
         } else {
             noexecute = 12
         }
-        
     }
-    
 })
-basic.forever(function on_forever7() {
-    
+basic.forever(function () {
     Bleb = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
     BleBSubNum = parseFloat(Bleb.substr(4, 7))
     if (Bleb.includes("Min=")) {
         if (BleBSubNum < 61) {
             minute = BleBSubNum
-            serial.writeLine("The Minute is set to " + ("" + minute) + " Via Bluetooth serial Input.")
+            serial.writeLine("The Minute is set to " + minute + " Via Bluetooth serial Input.")
         }
-        
     }
-    
 })
-basic.forever(function on_forever8() {
-    
+basic.forever(function () {
     SerialB = serial.readUntil(serial.delimiters(Delimiters.NewLine))
     SerialBSubNum = parseFloat(SerialB.substr(4, 7))
     if (SerialB.includes("Min=")) {
         if (SerialASubNum < 61) {
             minute = SerialBSubNum
-            serial.writeLine("The Minute is set to " + ("" + minute) + " Via serial Input.")
+            serial.writeLine("The Minute is set to " + minute + " Via serial Input.")
         }
-        
     }
-    
 })
-//  asteroid movement
-basic.forever(function on_forever9() {
-    
+// asteroid movement
+basic.forever(function () {
     if (noDo == 0) {
         if (gameoption == 24) {
             astroid2 = game.createSprite(Math.randomRange(0, 5), 0)
@@ -346,12 +315,10 @@ basic.forever(function on_forever9() {
                     astroid2.delete()
                     laser.delete()
                 }
-                
             }
             if (player.isTouching(astroid2)) {
                 gameoption = 0
                 newly1 = 0
-                game.setScore(0)
                 game.pause()
                 asteroid.delete()
                 astroid2.delete()
@@ -361,7 +328,6 @@ basic.forever(function on_forever9() {
                 astroid2.delete()
                 game.addScore(1)
             }
-            
         } else if (gameoption == 12) {
             astroid2 = game.createSprite(Math.randomRange(0, 5), 0)
             while (astroid2.get(LedSpriteProperty.Y) < 4) {
@@ -371,12 +337,10 @@ basic.forever(function on_forever9() {
                     astroid2.delete()
                     laser.delete()
                 }
-                
             }
             if (player.isTouching(astroid2)) {
                 gameoption = 0
                 newly1 = 0
-                game.setScore(0)
                 game.pause()
                 asteroid.delete()
                 astroid2.delete()
@@ -386,14 +350,10 @@ basic.forever(function on_forever9() {
                 astroid2.delete()
                 game.addScore(1)
             }
-            
         }
-        
     }
-    
 })
-basic.forever(function on_forever10() {
-    
+basic.forever(function () {
     if (noDo == 0) {
         if (gameoption == 24) {
             asteroid = game.createSprite(Math.randomRange(0, 5), 0)
@@ -404,12 +364,10 @@ basic.forever(function on_forever10() {
                     asteroid.delete()
                     laser.delete()
                 }
-                
             }
             if (player.isTouching(asteroid)) {
                 gameoption = 0
                 newly1 = 0
-                game.setScore(0)
                 game.pause()
                 asteroid.delete()
                 astroid2.delete()
@@ -419,7 +377,6 @@ basic.forever(function on_forever10() {
                 asteroid.delete()
                 game.addScore(1)
             }
-            
         } else if (gameoption == 12) {
             asteroid = game.createSprite(Math.randomRange(0, 5), 0)
             while (asteroid.get(LedSpriteProperty.Y) < 4) {
@@ -429,12 +386,10 @@ basic.forever(function on_forever10() {
                     asteroid.delete()
                     laser.delete()
                 }
-                
             }
             if (player.isTouching(asteroid)) {
                 gameoption = 1
                 newly1 = 0
-                game.setScore(0)
                 game.pause()
                 asteroid.delete()
                 astroid2.delete()
@@ -444,15 +399,11 @@ basic.forever(function on_forever10() {
                 asteroid.delete()
                 game.addScore(1)
             }
-            
         }
-        
     }
-    
 })
-//  firing lasers
-basic.forever(function on_forever11() {
-    
+// firing lasers
+basic.forever(function () {
     if (noDo == 0) {
         if (gameoption == 24) {
             input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
@@ -487,12 +438,9 @@ basic.forever(function on_forever11() {
         } else {
             noexecute = 8
         }
-        
     }
-    
 })
-control.inBackground(function on_in_background() {
-    
+control.inBackground(function () {
     while (true) {
         runningstatus = 1
         basic.pause(2000)
