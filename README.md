@@ -20,6 +20,9 @@ ______________________________________________________
 3. Shake to see the current time.
 4. Press The Logo to play a game.
 5. Long press the logo to stop the game.
+6. Press Pin 0 to play/pause the song playing
+7. Press Pin 1 to play the next song
+8. Press Pin 2 to play the previous song.
 
 Connect the Micro:Bit with this program running to your PC and open the serial for More Information.
 ______________________________________________________
