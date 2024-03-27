@@ -1,7 +1,11 @@
+def on_pin_pressed_p0():
+    if noDo == 0:
+        media.send_code(media.keys(media._MediaKey.PLAY_PAUSE))
+input.on_pin_pressed(TouchPin.P0, on_pin_pressed_p0)
+
 def on_logo_long_pressed():
     global gameoption, newly1
     if noDo == 0:
-        basic.pause(1000)
         game.set_score(0)
         player.delete()
         asteroid.delete()
@@ -31,6 +35,7 @@ def DoLoad():
         basic.pause(4000)
         control.panic(668)
     bluetooth.start_uart_service()
+    media.start_media_service()
     bluetooth.set_transmit_power(8)
     serial.set_baud_rate(BaudRate.BAUD_RATE115200)
     music.play(music.builtin_playable_sound_effect(soundExpression.giggle),
@@ -55,6 +60,7 @@ def DoLoad():
         # # . . .
         # # . . .
         """)
+    serial.write_line("Starting Bluetooth Media Service..")
     basic.pause(randdiv / 2.5)
     basic.show_leds("""
         # # # . .
@@ -108,6 +114,11 @@ def DoLoad():
     noDo = 0
     basic.clear_screen()
 
+def on_pin_pressed_p2():
+    if noDo == 0:
+        media.send_code(media.keys(media._MediaKey.PREVIOUS))
+input.on_pin_pressed(TouchPin.P2, on_pin_pressed_p2)
+
 def my_function():
     global noexecute
     if noDo == 0:
@@ -129,6 +140,11 @@ def on_button_pressed_b():
         else:
             minute += 1
 input.on_button_pressed(Button.B, on_button_pressed_b)
+
+def on_pin_pressed_p1():
+    if noDo == 0:
+        media.send_code(media.keys(media._MediaKey.NEXT))
+input.on_pin_pressed(TouchPin.P1, on_pin_pressed_p1)
 
 def on_gesture_shake():
     global noexecute
@@ -198,6 +214,9 @@ randNum12 = 0
 randdiv2 = 0
 DoLoad()
 delay = 500
+pins.touch_set_mode(TouchTarget.P1, TouchTargetMode.CAPACITIVE)
+pins.touch_set_mode(TouchTarget.P2, TouchTargetMode.CAPACITIVE)
+pins.touch_set_mode(TouchTarget.P0, TouchTargetMode.CAPACITIVE)
 
 def on_every_interval():
     global minute
@@ -305,7 +324,6 @@ def on_forever9():
             if player.is_touching(astroid2):
                 gameoption = 0
                 newly1 = 0
-                game.set_score(0)
                 game.pause()
                 asteroid.delete()
                 astroid2.delete()
@@ -325,7 +343,6 @@ def on_forever9():
             if player.is_touching(astroid2):
                 gameoption = 0
                 newly1 = 0
-                game.set_score(0)
                 game.pause()
                 asteroid.delete()
                 astroid2.delete()
@@ -350,7 +367,6 @@ def on_forever10():
             if player.is_touching(asteroid):
                 gameoption = 0
                 newly1 = 0
-                game.set_score(0)
                 game.pause()
                 asteroid.delete()
                 astroid2.delete()
@@ -370,7 +386,6 @@ def on_forever10():
             if player.is_touching(asteroid):
                 gameoption = 1
                 newly1 = 0
-                game.set_score(0)
                 game.pause()
                 asteroid.delete()
                 astroid2.delete()
